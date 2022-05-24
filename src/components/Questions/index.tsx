@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useForm, FormActions } from "../../contexts/FormContext";
 import api from "../../api";
 import { RootObject } from "./interfaces";
 import {
@@ -12,6 +13,7 @@ import * as C from "./styles";
 
 type Props = {
   categoryName: string;
+  answersCat:any;
   // title: string;
   // description: string;
   // icon: string;
@@ -26,6 +28,7 @@ type CategoryResult = {
 
 export const MapQuestions = ({
   categoryName,
+  answersCat,
   // title,
   // description,
   // icon,
@@ -36,7 +39,7 @@ export const MapQuestions = ({
   const [questions, setQuestions] = useState<RootObject[]>();
   const [respostas, setRespostas] = useState<CategoryResult[]>([]);
   const [respostas2, setRespostas2] = useState<number[]>(Array.from({length:10}));
-  const [answers, setAnswers] = useState<RootObject[]>();
+  const {state, dispatch} = useForm();
 
   useEffect(() => {
     async function getCateriesWithQuestions() {
@@ -56,7 +59,7 @@ export const MapQuestions = ({
         setRespostas((old: any) => [...old, { name, value: Number(value) }])
         let newData = respostas2
         newData[objIndex] = Number(value)
-        console.log(respostas2,objIndex)
+        // console.log(respostas2,objIndex)
         setRespostas2(newData)
         return 
     }
@@ -68,12 +71,21 @@ export const MapQuestions = ({
             newData[index] = Number(value)
             setRespostas2(newData)
             item.value = Number(value)
+            dispatch ({
+              type: answersCat,
+              payload: respostas
+            });
         }
         return item
     })
 
     setRespostas(newRespostas)
-    console.log (respostas)
+    dispatch ({
+      type: answersCat,
+      payload: respostas
+    });
+    // console.log (respostas)
+    console.log ("State:"+JSON.stringify (state.answersCat1))
 
 }
 

@@ -8,6 +8,7 @@ type State = {
   currentStep: number;
   name: string;
   level: 0|1;
+  answersCat1: object;
   email: string;
   github:string;
 }
@@ -32,6 +33,7 @@ const initialData = {
   level: 0,
   github:'',
   email:'',
+  answersCat1: [],
   respostas:[]
 }
 
@@ -42,13 +44,17 @@ const FormContext = createContext <ContextType | undefined > (undefined);
 
 
 // Reducer
+
+
+
 export enum FormActions {
   setCurrentStep,
   setName,
   setLevel,
   setEmail,
   setGithub,
-  setRespostas
+  setRespostas,
+  setAnswersCat1
 }
 const formReducer = (state: State, action:Action) => {
   switch(action.type) {
@@ -60,6 +66,9 @@ const formReducer = (state: State, action:Action) => {
 
     case FormActions.setLevel:
       return {...state, level: action.payload}
+
+    case FormActions.setAnswersCat1:
+        return {...state, answersCat1: action.payload}
 
     case FormActions.setEmail:
       return {...state, email: action.payload}

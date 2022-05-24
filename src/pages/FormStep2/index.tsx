@@ -44,12 +44,6 @@ useEffect(() => {
     }
   }
 
-  const setLevel = (level:number)=>{
-    dispatch({
-      type: FormActions.setLevel,
-      payload: level
-    })
-  }
 
   return (
     <Theme>
@@ -60,7 +54,7 @@ useEffect(() => {
 
         <hr />
         
-        <MapQuestions categoryName="Category 1"></MapQuestions>
+        <MapQuestions categoryName="Category 1" answersCat = {FormActions.setAnswersCat1} ></MapQuestions>
         {/* <SelectOption 
           title= "Sou Iniciante"
           description= "Comecei a programar ha menos de 2 anos"

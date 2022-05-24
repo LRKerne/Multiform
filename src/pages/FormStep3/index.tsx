@@ -23,6 +23,7 @@ export default function FormStep3() {
      type: FormActions.setCurrentStep,
      payload: 3
      })}
+    
  }) 
   
   const handleNextStep = () => {
